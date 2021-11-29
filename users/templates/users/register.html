@@ -1,0 +1,53 @@
+{% extends 'blogapp/base.html'%}
+{% load crispy_forms_tags %}
+{% block content %} 
+    <div class="content">
+        <form method="post">{% csrf_token %}
+            <fieldset class="form-group mb-4">
+                <legend>Join Today</legend>
+                {{form|crispy}}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="boder-top pt-3">
+            <small class="text-muted">
+                Already Have an account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script>
+    $('#id_username').change( function(){
+        var username = $(this).val();
+        $.ajax({
+            type : "GET",
+            url: '{% url "validuser" %}',
+            data:{
+                'username':username
+            },
+            dataType: 'json',
+            success: function(data){
+                console.log(data)
+                if(data.is_taken){
+                    $('#div_id_username>div').append('<p id="alert" class="alert alert-danger"><strong>A user with that username already exists.</strong></p>');
+                }else{
+                    $('#alert').remove();
+                }
+            }
+        });
+    } );
+
+    $('#id_email').change(function (){
+        var em = $(this).val();
+        var filter=/^([a-zA-Z0-9_\-\.])+\@+([a-zA-Z0-9_\-])+\.+([a-zA-Z]{2,4})+$/; 
+        if (filter.test(em)==0){
+            $('#div_id_email>div').append('<p class="alert alert-danger"><strong>Invalid Email Id</strong></p>');
+        };
+    })
+    
+</script>
+{% endblock %}
