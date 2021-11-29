@@ -1,4 +1,4 @@
-#!/home/uma/git/blog/blog-env/bin/python
+#!/home/uma/git/blog-website/blog-env/bin/python
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 

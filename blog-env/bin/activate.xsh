@@ -28,7 +28,7 @@ def _deactivate(args):
 _deactivate(["nondestructive"])
 aliases["deactivate"] = _deactivate
 
-$VIRTUAL_ENV = r"/home/uma/git/blog/blog-env"
+$VIRTUAL_ENV = r"/home/uma/git/blog-website/blog-env"
 
 $_OLD_VIRTUAL_PATH = $PATH
 $PATH = $PATH[:]
